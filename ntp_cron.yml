@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  tasks:
+    - name: Register cron
+      cron:
+        name: Refresh NTP every 45 minutes
+        minute: "*/45"
+        hour: "*"
+        user: root
+        job: "/etc/init.d/ntpd restart"
+      when: ansible_distribution  == 'RedHat' and ansible_distribution_version <= '6.9'
+
+
+    - name: Register cron
+      cron:
+        name: Refresh NTP every 45 minutes
+        minute: "*/45"
+        hour: "*"
+        user: root
+        job: "/bin/systemctl restart ntpd.service"
+      when: ansible_distribution  == 'RedHat' and ansible_distribution_version >= '7.0'
+
+

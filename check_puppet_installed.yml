@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  tasks:
+    - name: Register output
+      shell: echo "$(hostname) - $(ls /etc/init.d | grep {{ service_name }} | grep -v grep | wc -l)"
+      register: host_output
+
+    - local_action: file path=/tmp/puppet_installed.txt state=touch
+    - local_action: lineinfile line={{ host_output.stdout }} insertafter=EOF dest=/tmp/puppet_installed.txt
+

@@ -1,0 +1,41 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: make sure puppet and pe-mcollective services are stopped and disabled
+      service:
+        name: "{{ item }}"
+        state: stopped
+        enabled: no
+      with_items:
+        - puppet
+        - pe-mcollective
+      ignore_errors: true
+
+    - name: make sure crontab entry for mcollective is absent
+      shell: sed -e '/mcollective/ s/^#*/#/' /var/spool/cron/root -i
+      ignore_errors: true
+
+    - name: find the path of puppet file
+      find:
+        paths:
+          - /opt/puppet/bin
+          - /opt/puppetlabs/bin
+          - /usr/local/bin
+        patterns: puppet
+        file_type: file
+      register: puppet_path
+
+    - name: disable puppet agent
+      shell: "{{ item.path }} agent --disable 'Disabled by Ansible'"
+      with_items:
+        "{{ puppet_path.files }}"
+
+    - name: confirm mcollective process is dead
+      command: pkill -9 mcollective
+      ignore_errors: true
+...
+
+
+

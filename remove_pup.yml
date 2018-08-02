@@ -1,0 +1,87 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  tasks:
+     - name: remove the puppet package
+       yum:
+         name: puppet
+         state: absent
+
+     - name: remove the puppet-agent.x86_64 package
+       yum:
+         name: puppet-agent.x86_64
+         state: absent
+
+     - name: remove the pe-puppet package
+       yum:
+         name: pe-puppet.noarch
+         state: absent
+
+     - name: remove the pe-puppet-enterprise package
+       yum:
+         name: pe-puppet-enterprise.noarch
+         state: absent
+
+     - name: remove the pe-puppet-enterprise-release package
+       yum:
+         name: pe-puppet-enterprise-release.noarch
+         state: absent
+
+     - name: remove the mcollective package
+       yum:
+         name: mcollective.noarch
+         state: absent
+
+     - name: remove the mcollective-common package
+       yum:
+         name: mcollective-common.noarch
+         state: absent
+
+     - name: remove the pe-mcollective package
+       yum:
+         name: pe-mcollective.noarch
+         state: absent
+
+     - name: remove the pe-mcollective-common package
+       yum:
+         name: pe-mcollective-common.noarch
+         state: absent
+
+     - name: remove the puppetlabs-release package
+       yum:
+         name: puppetlabs-release.noarch
+         state: absent
+
+     - name: remove the puppetlabs-release-pc1 package
+       yum:
+         name: puppetlabs-release-pc1.noarch
+         state: absent
+
+     - name: remove the liaison-puppet-modules-boss package
+       yum:
+         name: liaison-puppet-modules-boss.noarch
+         state: absent
+
+     - name: remove the pulp-puppet-plugins package
+       yum:
+         name: pulp-puppet-plugins.noarch
+         state: absent
+
+     - name: remove the python-pulp-puppet-common package
+       yum:
+         name: python-pulp-puppet-common.noarch
+         state: absent
+
+     - name: remove the pulp-puppet-admin-extensions package
+       yum:
+         name: pulp-puppet-admin-extensions.noarch
+         state: absent
+
+     - name: Find all puppet directories/files and save them before deleting
+       shell: find / -name puppet* > /tmp/pup_files_removed.txt
+       ignore_errors: yes
+
+     - name: Remove all puppet directories and files
+       command: find / -name puppet* -exec rm -rf {} \;
+       ignore_errors: yes

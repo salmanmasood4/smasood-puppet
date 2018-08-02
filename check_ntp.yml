@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+    - name: Register output
+      shell: echo "$(hostname) - $(cat /etc/ntp.conf)"
+      register: ntp_output
+
+    - local_action: file path=/tmp/ntp.txt state=touch
+    - local_action: lineinfile line="{{ ansible_hostname }} \n {{ ntp_output.stdout }} \n"  insertafter=EOF dest=/tmp/ntp.txt

@@ -1,0 +1,73 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  tasks:
+  - name: Remove puppet agent
+    command: rpm -e puppet-agent-1.10.4-1.el6.x86_64
+    ignore_errors: yes
+
+  - name: Remove puppet agent
+    command: rpm -e puppet-agent-1.8.2-1.el6.x86_64
+    ignore_errors: yes
+
+  - name: Remove puppet agent
+    command: rpm -e puppet-agent-1.2.7-1.el6.x86_64
+    ignore_errors: yes
+
+  - name: Remove puppet agent
+    command: rpm -e puppet-agent-1.10.8-1.el6.x86_64
+    ignore_errors: yes
+
+  - name: Remove puppet agent
+    command: rpm -e puppet-agent-1.10.0-1.el6.x86_64
+    ignore_errors: yes
+
+  - name: Remove puppet agent
+    command: rpm -e puppet-agent-1.10.1-1.el6.x86_64
+    ignore_errors: yes
+
+  - name: Remove puppet agent
+    command: rpm -e puppet-agent-1.10.4-1.el6.x86_64
+    ignore_errors: yes
+
+  - name: Remove puppet agent
+    command: rpm -e puppet-agent-1.10.9-1.el6.x86_64
+    ignore_errors: yes
+
+  - name: Remove puppet agent
+    command: rpm -e puppet-agent-1.8.2-1.el6.x86_64
+    ignore_errors: yes
+
+  - name: Remove puppet agent
+    command: rpm -e puppet-2.7.26-2.el6.noarch
+    ignore_errors: yes
+
+  - name: Remove pe-puppet agent
+    command: rpm -e pe-puppet-3.3.3.1-1.pe.el6.noarch
+    ignore_errors: yes
+
+  - name: Remove pe-puppet enterprise agent
+    command: rpm -e pe-puppet-enterprise-release-3.1.1-1.pe.el6.noarch
+    ignore_errors: yes
+
+  - name: Remove puppetlabs
+    command: rpm -e puppetlabs-release-pc1-1.1.0-5.el6.noarch
+    ignore_errors: yes
+
+  - name: Remove puppetlabs
+    command: rpm -e puppetlabs-stdlib-4.5.1-2.20150121git7a91f20.el6.noarch
+    ignore_errors: yes
+
+  - name: Remove puppet modules
+    command: rpm -e liaison-puppet-modules-boss-1-0.noarch
+    ignore_errors: yes
+
+  - name: Remove mcollective
+    command: rpm -e pe-mcollective-2.2.4-2.pe.el6.noarch
+    ignore_errors: yes
+
+  - name: Remove mcollective
+    command: rpm -e pe-mcollective-common-2.2.4-2.pe.el6.noarch
+    ignore_errors: yes
+

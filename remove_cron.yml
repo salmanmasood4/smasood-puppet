@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  tasks:
+    - name: Register cron
+      cron:
+        name: "Refresh NTP every 15 minutes"
+        user: root
+        state: absent
+      when: ansible_distribution  == 'RedHat' and ansible_distribution_version <= '6.9'
+
+
+    - name: Register cron
+      cron:
+        name: "Refresh NTP every 15 minutes"
+        user: root
+        state: absent
+      when: ansible_distribution  == 'RedHat' and ansible_distribution_version >= '7.0'
+
+
